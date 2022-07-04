@@ -28,18 +28,21 @@ const numbersList = document.getElementById('numbers');
  * @param {number} total totale dei numeri da generare
  * @returns {number} total randomics numbers
  */
-const getTotRandomNumber = (min, max, total) => {
-    let randomNumbers = [];
-    for (i = min; i <= total; i++) {
-        randomNumbers += (Math.floor(Math.random() * (max + 1 - min)) + min);
-    }
+function getTotRandomNumbers(min, max, total) {
+    let randomNumber = [];
+    let numbers;
 
-    console.log(randomNumbers)
-    return randomNumbers;
+    for (let i = min; i <= total; i++) {
+        do {
+
+            numbers = (Math.floor(Math.random() * (max + 1 - min) + min));
+
+        } while (randomNumber.includes(numbers))
+        randomNumber.push(numbers)
+    }
+    return randomNumber;
 }
 
-let randomNumbers = [];
-const numbers = getTotRandomNumber(1, 100, 5)
-randomNumbers.push(numbers)
-numbersList.innerHTML += '' + `${randomNumbers}  `; //???
+let myNumbers = getTotRandomNumbers(1, 100, 100).sort();
+console.log(myNumbers)
 
