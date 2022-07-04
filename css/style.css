@@ -22,6 +22,5 @@ main {
 #numbers>* {
     font-size: 5rem;
     list-style-type: none;
-    margin: 0;
     padding: 1rem;
 }

@@ -11,9 +11,35 @@ l'importante è far sparire i numeri allo scadere dei 30 secondi!
 */
 
 /*
-in primo luogo creiamo un div cui aggangiarci poi tramite js
+in primo luogo creiamo un ul cui aggangiarci poi tramite js
 subito dopo, generiamo 5 numeri casuali tramite una funzione
 creiamo un timer di trenta secondi che si avvii all'inizio della pagina, perchè no, tramite funzione
 piazzare alert e prompt alla fine con gap, affinchè non avremo problemi di tempistiche con questi; 
 */
+//dichiaro variabili globali
+const timer = document.querySelector('countdown');
+const numbersList = document.getElementById('numbers');
+
+//funzione generatrice 5 numeri causuali 
+/**
+ * 
+ * @param {number} min valore minimo del numero
+ * @param {number} max valore massimo del numero
+ * @param {number} total totale dei numeri da generare
+ * @returns {number} total randomics numbers
+ */
+const getTotRandomNumber = (min, max, total) => {
+    let randomNumbers = [];
+    for (i = min; i <= total; i++) {
+        randomNumbers += (Math.floor(Math.random() * (max + 1 - min)) + min);
+    }
+
+    console.log(randomNumbers)
+    return randomNumbers;
+}
+
+let randomNumbers = [];
+const numbers = getTotRandomNumber(1, 100, 5)
+randomNumbers.push(numbers)
+numbersList.innerHTML += '' + `${randomNumbers}  `; //???
 
