@@ -1,0 +1,27 @@
+/* reset*/
+* {
+    box-sizing: border-box;
+    margin: 0;
+
+}
+
+/* main */
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/*timer */
+.countdown {
+    font-size: 10rem;
+    color: #a0a0a0;
+}
+
+/* numbers */
+#numbers>* {
+    font-size: 5rem;
+    list-style-type: none;
+    margin: 0;
+    padding: 1rem;
+}
