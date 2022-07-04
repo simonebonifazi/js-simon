@@ -10,12 +10,21 @@
     display: none;
 }
 
+.d-flex {
+    display: flex;
+}
+
 /* main */
 main {
-    display: flex;
+
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+/* header */
+header {
+    text-align: center;
 }
 
 /*timer */
@@ -26,7 +35,6 @@ main {
 
 /* numbers */
 #numbers {
-    display: flex;
     justify-content: space-between;
 }
 
