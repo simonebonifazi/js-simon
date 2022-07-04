@@ -5,20 +5,31 @@
 
 }
 
+/* utils */
+.hidden {
+    display: none;
+}
+
 /* main */
 main {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
 /*timer */
-.countdown {
+#countdown {
     font-size: 10rem;
     color: #a0a0a0;
 }
 
 /* numbers */
+#numbers {
+    display: flex;
+    justify-content: space-between;
+}
+
 #numbers>* {
     font-size: 5rem;
     list-style-type: none;
