@@ -17,7 +17,7 @@ creiamo un timer di trenta secondi che si avvii all'inizio della pagina, perchè
 piazzare alert e prompt alla fine con gap
 affinchè non avremo problemi di tempistiche con questi; 
 */
-
+/***************Funzioni */
 /**funzione generatrice numeri causuali
  * 
  * @param {number} min valore minimo del numero
@@ -59,52 +59,56 @@ const myInterval = () => {
 /**
  * funzione per ritardare prompt
  */
-const promptLag = () => {
+function promptLag() {
 
-    // for (i = 0; i < myNumbers.length; i++) {
-    //     userAnswer.push(parseInt(prompt('inserisci qui, in ordine, i numeri che hai visto!')));
-    // }
-    // console.log(userAnswer)
-    // //verifico se ha indovinato e quante, nel caso
+    for (i = 0; i < 5; i++) {
+        userAnswer.push(parseInt(prompt('inserisci qui, in ordine, i numeri che hai visto!')));
+    }
+    console.log(userAnswer)
+    //verifico se ha indovinato e quante, nel caso
 
 
 }
-//dichiaro variabili globali
+
+//******************** variabili globali
 const timer = document.getElementById('countdown');
 const numbersList = document.getElementById('numbers');
-//timer 30 secondi
-let seconds = 30;
-//stampo nel DOM i secondi
-timer.innerText = seconds;
+const startGame = document.getElementById('start-game');
+const countDown = '';
+const delayedQuestion = '';
 //preparao un array per contenere le risposte dell'utente
 const userAnswer = [];
 
 
-//invoco la funzione
-let myNumbers = getTotRandomNumbers(1, 100, 5);
-console.log(myNumbers)
-//stampo in DOM tramite ciclo for
-for (i = 0; i < myNumbers.length; i++) {
-    //creo gli elementi da inserire
-    const listItems = document.createElement('li');
-    //ci aggiunngo i singoli valori del mio array di numeri casuali
-    listItems.append(myNumbers[i]);
-    console.log(myNumbers[i])
-    //li inserisco nel DOM
-    numbersList.appendChild(listItems);
-    console.log(listItems)
-}
-// //per prendere tutti i li
-// const lI = document.querySelectorAll('li')
-// console.log(lI)
+//timer 30 secondi
+let seconds = 30;
+/*********************************event listener al click */
+startGame.addEventListener('click', function () {
 
-// if (seconds === 0) {
-//     lI.classList.add('hidden')
-// }
+    //stampo nel DOM i secondi
+    timer.innerText = seconds;
 
-//invoco la funzione 
-const countDown = setInterval(myInterval, 100);
 
-//chiedo i 5 numeri all'utente
-const delayedQuestion = setTimeout(promptLag, 3050);
+    //invoco la funzione
+    let myNumbers = getTotRandomNumbers(1, 100, 5);
+    console.log(myNumbers)
+    //stampo in DOM tramite ciclo for
+    for (i = 0; i < myNumbers.length; i++) {
+        //creo gli elementi da inserire
+        const listItems = document.createElement('li');
+        //ci aggiunngo i singoli valori del mio array di numeri casuali
+        listItems.append(myNumbers[i]);
+        console.log(myNumbers[i])
+        //li inserisco nel DOM
+        numbersList.appendChild(listItems);
+        console.log(listItems)
+    }
+    //invoco la funzione 
+    const countDown = setInterval(myInterval, 100);
+
+    //chiedo i 5 numeri all'utente
+    const delayedQuestion = setTimeout(promptLag, 3050);
+
+    //al
+})
 

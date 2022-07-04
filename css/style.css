@@ -43,3 +43,10 @@ header {
     list-style-type: none;
     padding: 1rem;
 }
+
+/* button start */
+#start-game {
+    font-size: 1.5rem;
+    padding: 0.5rem;
+    border-radius: 1rem;
+}
