@@ -25,79 +25,30 @@ affinchè non avremo problemi di tempistiche con questi;
  * @param {number} total totale dei numeri da generare
  * @returns {number} total randomics numbers
  */
-const getTotRandomNumbers = (min, max, total) => {
-    let randomNumber = [];
-    let numbers;
+const getTotUniqueRandomNumbers = (min, max, total) => {
+    const randomNumber = [];
 
-    for (let i = min; i <= total; i++) {
-        do {
-
-            numbers = (Math.floor(Math.random() * (max + 1 - min) + min));
-
-        } while (randomNumber.includes(numbers))
-        randomNumber.push(numbers)
+    while (randomNumber.length < total) {
+        const numbers = Math.floor(Math.random() * (max + 1 - min)) + min;
+        if (!randomNumber.includes(numbers)) randomNumber.push(numbers);
     }
     return randomNumber;
 }
-/** funzione che imposta il timer a 30 secondi
- * 
- */
-const myInterval = () => {
-    //decremento
-    timer.innerText = --seconds;
-    //fermo la funzione allo scadere del countdown
-    if (seconds === 0) {
-        //fermo allo zero il countdown
-        clearInterval(countDown);
-        //lo rimuovo dalla grafica
-        timer.classList.add('hidden')
-        numbersList.classList.remove('d-flex')
-        numbersList.classList.add('hidden')
-    }
-}
 
 /**
- * funzione per ritardare prompt
+ * funzione per avviare countdown al click
  */
-function promptLag() {
-
-    for (i = 0; i < 5; i++) {
-        userAnswer.push(parseInt(prompt(`inserisci qui, il ${i + 1}° numero che hai memorizzato!`)));
-    }
-    console.log(userAnswer)
-    //verifico se ha indovinato e quante, nel caso
-
+function myInterval() {
 
 }
 
-/**
- * funzione per stabilire quante domande ha indovinato 
- * @param number risposte dell'utente
- * @param number numeri casuali generati dal software
- * @returns numero delle volte in cui sono uguali le due 
- */
-function results(userNumbers, cpuNumbers) {
-    let result = 0;
-    userNumbers = 5
-    cpuNumbers = 5
-    // per ogni numer dell'array delle risposte che corrisponde ad un numero del gioco, aggiungo un punto
-    for (let i = 0; i < userNumbers; i++) {
-        for (let j = 0; j < cpuNumbers; j++) {
-            if ([i] === [j]) {
-                result++
-            }
-        }
-    }
-    return alert(result);
-
-}
 //******************** variabili globali
 const timer = document.getElementById('countdown');
 const numbersList = document.getElementById('numbers');
 const startGame = document.getElementById('start-game');
-const countDown = '';
 const delayedQuestion = '';
-const gameResults = 0;
+let countDown = '';
+let gameResults = 0;
 //preparao un array per contenere le risposte dell'utente
 const userAnswer = [];
 //timer 30 secondi
@@ -111,7 +62,7 @@ startGame.addEventListener('click', function () {
 
 
     //invoco la funzione
-    let myNumbers = getTotRandomNumbers(1, 100, 5);
+    const myNumbers = getTotUniqueRandomNumbers(1, 99, 5);
     console.log(myNumbers)
     //stampo in DOM tramite ciclo for
     for (i = 0; i < myNumbers.length; i++) {
@@ -119,19 +70,41 @@ startGame.addEventListener('click', function () {
         const listItems = document.createElement('li');
         //ci aggiunngo i singoli valori del mio array di numeri casuali
         listItems.append(myNumbers[i]);
-        console.log(myNumbers[i])
         //li inserisco nel DOM
         numbersList.appendChild(listItems);
-        console.log(listItems)
     }
-    //invoco la funzione 
-    const countDown = setInterval(myInterval, 100);
+    //setto il countdown
+    const countDown = setInterval(() => {
+        //decremento
+        timer.innerText = --seconds;
+        //fermo la funzione allo scadere del countdown
+        if (seconds === 0) {
+            //fermo allo zero il countdown
+            clearInterval(countDown);
+            //lo rimuovo dalla grafica
+            timer.classList.add('hidden')
+            numbersList.className = 'hidden'
+        }
+    }, 100);
 
-    //chiedo i 5 numeri all'utente
-    const delayedQuestion = setTimeout(promptLag, 3050);
+    //chiedo i 5 numeri all'utente e li valido
+    setTimeout(() => {
+        //controllo che risponda 5 volte
+        while (userAnswer.length < 5) {
+            userAnswer.push(parseInt(prompt(`inserisci qui, il ${i + 1}° numero che hai memorizzato!`)));
+        }
 
+        console.log(userAnswer)
+        //verifico se ha indovinato e quante, nel caso
+
+        for (let i = 0; i < userAnswer.length; i++) {
+            if (myNumbers.includes(userAnswer[i])) gameResults++
+        }
+        alert(`Il tuo punteggio è di: ${gameResults}`)
+    }, 3050);
+    console.log(gameResults)
+    console.log(myNumbers)
     //verifico tramite funzione se e quante domande ha indovinato
     // const gameResults = results(myNumbers, userAnswer)
-    const delayedResults = setTimeout(results, 4050)
 })
 
