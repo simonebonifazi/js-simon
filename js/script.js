@@ -53,6 +53,11 @@ let gameResults = 0;
 const userAnswer = [];
 //timer 30 secondi
 let seconds = 30;
+//preparazione
+const min = 1;
+const max = 99;
+const totalNumbers = 5;
+
 
 /*********************************event listener al click */
 startGame.addEventListener('click', function () {
@@ -62,7 +67,7 @@ startGame.addEventListener('click', function () {
 
 
     //invoco la funzione
-    const myNumbers = getTotUniqueRandomNumbers(1, 99, 5);
+    const myNumbers = getTotUniqueRandomNumbers(min, max, totalNumbers);
     console.log(myNumbers)
     //stampo in DOM tramite ciclo for
     for (i = 0; i < myNumbers.length; i++) {
@@ -90,21 +95,17 @@ startGame.addEventListener('click', function () {
     //chiedo i 5 numeri all'utente e li valido
     setTimeout(() => {
         //controllo che risponda 5 volte
-        while (userAnswer.length < 5) {
-            userAnswer.push(parseInt(prompt(`inserisci qui, il ${i + 1}° numero che hai memorizzato!`)));
+        while (userAnswer.length < totalNumbers) {
+            userAnswer.push(parseInt(prompt(`inserisci qui, i numeri che hai memorizzato!`)));
         }
 
         console.log(userAnswer)
         //verifico se ha indovinato e quante, nel caso
-
+        let correctNumbers = [];
         for (let i = 0; i < userAnswer.length; i++) {
-            if (myNumbers.includes(userAnswer[i])) gameResults++
+            if (myNumbers.includes(userAnswer[i])) correctNumbers.push(userAnswer[i]);
         }
-        alert(`Il tuo punteggio è di: ${gameResults}`)
+        alert(`Il tuo punteggio è di: ${correctNumbers.length} ; hai indovinato ${correctNumbers}`)
     }, 3050);
-    console.log(gameResults)
-    console.log(myNumbers)
-    //verifico tramite funzione se e quante domande ha indovinato
-    // const gameResults = results(myNumbers, userAnswer)
 })
 
