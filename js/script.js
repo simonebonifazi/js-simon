@@ -35,18 +35,10 @@ const getTotUniqueRandomNumbers = (min, max, total) => {
     return randomNumber;
 }
 
-/**
- * funzione per avviare countdown al click
- */
-function myInterval() {
-
-}
-
 //******************** variabili globali
 const timer = document.getElementById('countdown');
 const numbersList = document.getElementById('numbers');
 const startGame = document.getElementById('start-game');
-const delayedQuestion = '';
 let countDown = '';
 let gameResults = 0;
 //preparao un array per contenere le risposte dell'utente
@@ -62,12 +54,12 @@ const totalNumbers = 5;
 /*********************************event listener al click */
 startGame.addEventListener('click', function () {
 
+
     //stampo nel DOM i secondi
     timer.innerText = seconds;
 
-
     //invoco la funzione
-    const myNumbers = getTotUniqueRandomNumbers(min, max, totalNumbers);
+    let myNumbers = getTotUniqueRandomNumbers(min, max, totalNumbers);
     console.log(myNumbers)
     //stampo in DOM tramite ciclo for
     for (i = 0; i < myNumbers.length; i++) {
@@ -78,6 +70,7 @@ startGame.addEventListener('click', function () {
         //li inserisco nel DOM
         numbersList.appendChild(listItems);
     }
+
     //setto il countdown
     const countDown = setInterval(() => {
         //decremento
@@ -90,11 +83,11 @@ startGame.addEventListener('click', function () {
             timer.classList.add('hidden')
             numbersList.className = 'hidden'
         }
-    }, 100);
+    }, 1000);
 
     //chiedo i 5 numeri all'utente e li valido
     setTimeout(() => {
-        //controllo che risponda 5 volte
+        //controllo che risponda 5 volte 
         while (userAnswer.length < totalNumbers) {
             userAnswer.push(parseInt(prompt(`inserisci qui, i numeri che hai memorizzato!`)));
         }
@@ -105,7 +98,8 @@ startGame.addEventListener('click', function () {
         for (let i = 0; i < userAnswer.length; i++) {
             if (myNumbers.includes(userAnswer[i])) correctNumbers.push(userAnswer[i]);
         }
-        alert(`Il tuo punteggio è di: ${correctNumbers.length} ; hai indovinato ${correctNumbers}`)
-    }, 3050);
+        if (correctNumbers == 0) alert('Forse dovresti allenarti un po\'... li hai sbagliati tutti!')
+        else alert(`Il tuo punteggio è di: ${correctNumbers.length} ; hai indovinato ${correctNumbers}`)
+    }, 30500);
 })
 
